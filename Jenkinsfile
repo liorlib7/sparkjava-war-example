@@ -1,5 +1,5 @@
 pipeline {
-   agent any
+   agent {lable 'master'}
 
    stages {
       stage('Hello') {
