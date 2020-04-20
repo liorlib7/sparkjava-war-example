@@ -28,7 +28,7 @@ pipeline {
               }
           }
       }
-      stage (save space) {
+      stage ('save space') {
           steps {
               sh 'docker image prune -f'
           }
