@@ -1,6 +1,5 @@
 pipeline {
     environment {
-        registry = "gustavoapolinario/docker-test"
         registryCredential = 'dockerhub'
         dockerImage = 'spark:$BUILD_NUMBER'
     }
