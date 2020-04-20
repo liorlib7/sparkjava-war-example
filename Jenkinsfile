@@ -16,7 +16,7 @@ pipeline {
           steps {
               sh 'docker run -d -p 8090:8080 spark:$BUILD_NUMBER'
               sh 'sleep 7'
-              sh 'chmod +x ./httpscheck.sh'
+              sh 'chmod +x ./httpcheck.sh'
               sh './httpcheck.sh'
           }
       }
