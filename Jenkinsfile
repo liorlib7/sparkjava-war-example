@@ -8,7 +8,8 @@ pipeline {
    stages {
       stage('Build') {
          steps {
-             sh 'ls -a "$WORKSPACE"'
+             sh 'chmod +x "$WORKSPACE/httpcheck.sh"'
+             sh '"$WORKSPACE/httpcheck.sh"
          }
       }
    }
