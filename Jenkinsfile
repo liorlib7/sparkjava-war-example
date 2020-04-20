@@ -6,7 +6,7 @@ pipeline {
             dockerfile {
                filename 'Dockerfile'
                additionalBuildArgs '-t spark:${BUILD_NUMBER}' 
-               args '--name m'
+               args '--name md'
             }
          }
          steps {
