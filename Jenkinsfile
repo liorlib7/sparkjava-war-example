@@ -8,8 +8,8 @@ pipeline {
    stages {
       stage('Build') {
          steps {
-             sh 'echo ${env.WORKSPACE}'
-             sh 'echo ${env.JJOB_NAME}'
+             sh 'echo $WORKSPACE'
+             sh 'echo $JOB_NAME'
          }
       }
    }
