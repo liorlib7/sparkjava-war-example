@@ -9,7 +9,7 @@ pipeline {
       stage('Build') {
          steps {
              sh 'chmod +x "$WORKSPACE/httpcheck.sh"'
-             sh '"$WORKSPACE/httpcheck.sh"
+             sh '"$WORKSPACE/httpcheck.sh"'
          }
       }
    }
