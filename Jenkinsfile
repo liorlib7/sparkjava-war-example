@@ -14,7 +14,7 @@ pipeline {
       }
       stage ('Test') {
           steps {
-              sh 'docker run -d -p 8080:8080 spark:$BUILD_NUMBER'
+              sh 'docker run -d -p 8080:8090 spark:$BUILD_NUMBER'
               sh 'sleep 7'
               sh './httpcheck.sh'
           }
