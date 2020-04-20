@@ -10,7 +10,7 @@ pipeline {
             }
          }
          steps {
-            whoami   
+            sh 'whoami'   
          }
       }
    }
