@@ -13,7 +13,6 @@ pipeline {
       }
       stage ('Test') {
           steps {
-              sh 'docker rm www -f'
               sh 'docker run -d --name www -p 8090:8080 spark:$BUILD_NUMBER'
               sh 'sleep 7'
               sh 'chmod +x ./httpcheck.sh'
