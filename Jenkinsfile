@@ -1,16 +1,10 @@
 pipeline {
-   agent none
+   agent label 'master'
+
    stages {
-      stage('Test') {
-         agent {
-            dockerfile {
-               filename 'Dockerfile'
-               additionalBuildArgs '-t spark:${BUILD_NUMBER}' 
-               args '--name md'
-            }
-         }
+      stage('Build') {
          steps {
-            sh 'whoami'   
+            sh docker build -t spark:$BUILD_NUMBER
          }
       }
    }
