@@ -8,7 +8,7 @@ pipeline {
    stages {
       stage('Build') {
          steps {
-             sh 'ls -a $WORKSPACE'
+             sh 'ls -a "$WORKSPACE"'
          }
       }
    }
