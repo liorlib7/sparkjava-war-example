@@ -1,10 +1,16 @@
 pipeline {
-   agent {label 'master'}
-
+   agent none
    stages {
-      stage('Hello') {
+      stage('Test') {
+         agent {
+            dockerfile {
+               filename 'Dockerfile'
+               additionalBuildArgs '-t Spark:${BUILD_NUMBER}' 
+               args '--name m'
+            }
+         }
          steps {
-            echo 'Hello World'
+            whoami   
          }
       }
    }
