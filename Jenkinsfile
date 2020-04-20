@@ -8,8 +8,7 @@ pipeline {
    stages {
       stage('Build') {
          steps {
-             sh 'echo $WORKSPACE'
-             sh 'echo $JOB_NAME'
+             sh 'ls -a $WORKSPACE'
          }
       }
    }
