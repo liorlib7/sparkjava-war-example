@@ -5,7 +5,7 @@ pipeline {
          agent {
             dockerfile {
                filename 'Dockerfile'
-               additionalBuildArgs '-t Spark:${BUILD_NUMBER}' 
+               additionalBuildArgs '-t spark:${BUILD_NUMBER}' 
                args '--name m'
             }
          }
