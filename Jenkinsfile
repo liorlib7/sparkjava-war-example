@@ -21,6 +21,7 @@ pipeline {
       }
       stage ('Deploy') {
           steps {
+              sh 'docker tag spark:$BUILD_NUMBER liorlieb7/spark:$BUILD_NUMBER'
               sh 'docker push liorlieb7/spark:$BUILD_NUMBER'
           }
       }
