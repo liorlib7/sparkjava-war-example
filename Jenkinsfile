@@ -8,11 +8,30 @@ pipeline {
    stages {
       stage('Build') {
          steps {
-             sh '''
-             chmod +x dm.sh
-             ./dm.sh
-             '''
+            sh 'docker build -t spark:$BUILD_NUMBER .'
          }
+      }
+      stage ('Test') {
+          steps {
+              sh 'docker run -d --name www -p 8090:8080 spark:$BUILD_NUMBER'
+              sh 'sleep 7'
+              sh 'chmod +x ./httpcheck.sh'
+              sh './httpcheck.sh'
+          }
+      }
+      stage ('Deploy') {
+          steps {
+              script {
+                  docker.withRegistry('', registryCredential ) {
+                      dockerImage.push()
+                  }
+              }
+          }
+      }
+      stage ('save space') {
+          steps {
+              sh 'docker image prune -f'
+          }
       }
    }
 }
