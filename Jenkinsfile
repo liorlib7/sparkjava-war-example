@@ -9,10 +9,10 @@ pipeline {
       stage('Build') {
          steps {
              sh '''
-             chmod +x ./httpcheck.sh
+             chmod +x httpcheck.sh
              ls -la
              cat httpcheck.sh
-             ./httpcheck.sh
+             sh httpcheck.sh
              '''
          }
       }
