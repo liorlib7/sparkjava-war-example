@@ -21,14 +21,7 @@ pipeline {
       }
       stage ('Deploy') {
           steps {
-              script {
-                  withCredentials([
-                      [$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD'],
-                 ]){
-                      sh 'echo "$PASSWORD" | docker login -u $USERNAME --password-stdin'
-                      dockerImage.push()
-                   }
-              }
+              dockerImage.push()
           }
       }
       stage ('save space') {
