@@ -24,7 +24,7 @@ pipeline {
               script {
                   withCredentials([usernamePassword( credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')])
                   docker.withRegistry('', registryCredential ) {
-                      sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
+                      sh 'docker login -u $USERNAME -p $PASSWORD'
                       dockerImage.push()
                   }
               }
