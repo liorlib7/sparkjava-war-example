@@ -25,11 +25,9 @@ pipeline {
                   withCredentials([
                       [$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD'],
                  ]){
-                  docker.withRegistry('', 'dockerhub' ) {
-                      sh 'docker login -u $USERNAME -p $PASSWORD'
+                      sh 'echo "$PASSWORD" | docker login -u $USERNAME --password-stdin'
                       dockerImage.push()
-                  }
-                 }
+                   }
               }
           }
       }
