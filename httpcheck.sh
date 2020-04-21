@@ -6,4 +6,4 @@ then
         echo "ERROR"
         exit 1
 fi
-echo $codeNum
+docker rm -f www
