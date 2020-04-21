@@ -28,7 +28,7 @@ pipeline {
       stage ('save space') {
           steps {
               sh 'docker image prune -f'
-              sh 'docker rmi spark:$BUILD_NUMBER'
+              sh 'docker rmi spark:$BUILD_NUMBER liorlieb7/spark:$BUILD_NUMBER'
           }
       }
    }
