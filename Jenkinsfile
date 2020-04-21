@@ -11,7 +11,7 @@ pipeline {
              sh 'docker run -d --name lior -p 8090:8080 tomcat:8'
              sh 'sleep 3'
              sh 'chmod +x ./httpcheck.sh'
-             sh 'bash ./httpcheck.sh'
+             sh './httpcheck.sh'
          }
       }
    }
