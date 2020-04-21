@@ -21,7 +21,7 @@ pipeline {
       }
       stage ('Deploy') {
           steps {
-              sh 'docker push liorlieb7/dockerImage'
+              sh 'docker push liorlieb7/spark:$BUILD_NUMBER'
           }
       }
       stage ('save space') {
