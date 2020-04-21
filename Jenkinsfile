@@ -12,7 +12,7 @@ pipeline {
              chmod +x httpcheck.sh
              ls -la
              cat httpcheck.sh
-             sh httpcheck.sh
+             ./httpcheck.sh
              '''
          }
       }
