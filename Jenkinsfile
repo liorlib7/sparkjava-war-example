@@ -21,7 +21,7 @@ pipeline {
       }
       stage ('Deploy') {
           steps {
-              dockerImage.push()
+              sh 'docker push liorlieb7/dockerImage'
           }
       }
       stage ('save space') {
