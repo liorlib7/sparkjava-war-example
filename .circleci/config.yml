@@ -4,8 +4,8 @@ jobs:
     docker:
       - image: 'cimg/base:2020.11'
         auth:
-         username: liorlieb7
-         password: $DOCKERHUB_PASSWORD
+          username: liorlieb7
+          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - setup_remote_docker:
