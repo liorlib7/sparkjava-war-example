@@ -18,7 +18,7 @@ jobs:
           ./httpcheck.sh
           docker tag spark:$CIRCLE_BUILD_NUM liorlieb7/spark:$CIRCLE_BUILD_NUM
           docker images
-          docker login
+          docker login -u liorlieb7 -p $DOCKERHUB_PASSWORD
           docker push liorlieb7/spark:$CIRCLE_BUILD_NUM
           
 workflows:
