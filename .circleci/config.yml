@@ -17,6 +17,8 @@ jobs:
           chmod +x ./httpcheck.sh
           ./httpcheck.sh
           docker tag spark:$CIRCLE_BUILD_NUM liorlieb7/spark:$CIRCLE_BUILD_NUM
+          docker images
+          docker login
           docker push liorlieb7/spark:$CIRCLE_BUILD_NUM
           
 workflows:
