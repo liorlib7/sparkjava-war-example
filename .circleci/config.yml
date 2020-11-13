@@ -4,14 +4,15 @@ jobs:
     docker:
       - image: 'cimg/base:2020.11'
     steps:
+      - checkout
       - run:
-          command: 'docker build -t spark:$BUILD_NUMBER .'
+          command: 'docker build -t spark:$CIRCLE_BUILD_NUM .'
   test:
     docker:
       - image: 'cimg/base:2020.11'
     steps:
       - run:
-          command: 'docker run -d --name www -p 8090:8080 spark:$BUILD_NUMBER'
+          command: 'docker run -d --name www -p 8090:8080 spark:$CIRCLE_BUILD_NUM'
       - run:
           command: sleep 7
       - run:
@@ -23,9 +24,9 @@ jobs:
       - image: 'cimg/base:2020.11'
     steps:
       - run:
-          command: 'docker tag spark:$BUILD_NUMBER liorlieb7/spark:$BUILD_NUMBER'
+          command: 'docker tag spark:$CIRCLE_BUILD_NUM liorlieb7/spark:$CIRCLE_BUILD_NUM'
       - run:
-          command: 'docker push liorlieb7/spark:$BUILD_NUMBER'
+          command: 'docker push liorlieb7/spark:$CIRCLE_BUILD_NUM'
   save-space:
     docker:
       - image: 'cimg/base:2020.11'
@@ -33,7 +34,7 @@ jobs:
       - run:
           command: docker image prune -f
       - run:
-          command: 'docker rmi -f spark:$BUILD_NUMBER liorlieb7/spark:$BUILD_NUMBER'
+          command: 'docker rmi -f spark:$CIRCLE_BUILD_NUM liorlieb7/spark:$CIRCLE_BUILD_NUM'
 workflows:
   version: 2
   build-and-test:
