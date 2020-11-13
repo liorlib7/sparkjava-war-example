@@ -3,49 +3,25 @@ jobs:
   build:
     docker:
       - image: 'cimg/base:2020.11'
+        auth:
+         username: liorlieb7
+         password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
-      - run:
-          command: 'docker build -t spark:$CIRCLE_BUILD_NUM .'
-  test:
-    docker:
-      - image: 'cimg/base:2020.11'
-    steps:
-      - run:
-          command: 'docker run -d --name www -p 8090:8080 spark:$CIRCLE_BUILD_NUM'
-      - run:
-          command: sleep 7
-      - run:
-          command: chmod +x ./httpcheck.sh
-      - run:
-          command: ./httpcheck.sh
-  deploy:
-    docker:
-      - image: 'cimg/base:2020.11'
-    steps:
-      - run:
-          command: 'docker tag spark:$CIRCLE_BUILD_NUM liorlieb7/spark:$CIRCLE_BUILD_NUM'
-      - run:
-          command: 'docker push liorlieb7/spark:$CIRCLE_BUILD_NUM'
-  save-space:
-    docker:
-      - image: 'cimg/base:2020.11'
-    steps:
-      - run:
-          command: docker image prune -f
-      - run:
-          command: 'docker rmi -f spark:$CIRCLE_BUILD_NUM liorlieb7/spark:$CIRCLE_BUILD_NUM'
+      - setup_remote_docker:
+          version: 19.03.13
+          docker_layer_caching: true
+      - run: |
+          docker build -t spark:$CIRCLE_BUILD_NUM .
+          docker run -d --name www -p 8090:8080 spark:$CIRCLE_BUILD_NUM
+          sleep 7
+          chmod +x ./httpcheck.sh
+          ./httpcheck.sh
+          docker tag spark:$CIRCLE_BUILD_NUM liorlieb7/spark:$CIRCLE_BUILD_NUM
+          docker push liorlieb7/spark:$CIRCLE_BUILD_NUM
+          
 workflows:
   version: 2
   build-and-test:
     jobs:
       - build
-      - test:
-          requires:
-            - build
-      - deploy:
-          requires:
-            - test
-      - save-space:
-          requires:
-            - deploy
